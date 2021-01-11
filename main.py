@@ -23,12 +23,12 @@ print(client.list_database_names())
 
 # Init collections
 collectionMedias = db.init_collection(client, database, "medias", db.get_db_name())
-mydict = { "name": "Peter", "address": "Lowstreet 27" }
-x = collectionMedias.insert_one(mydict)
-print(x)
+#mydict = { "name": "Peter", "address": "Lowstreet 27" }
+#x = collectionMedias.insert_one(mydict)
+#print(x)
 
-for y in collectionMedias.find():
-  print(y)
+#for y in collectionMedias.find():
+  #print(y)
 
 @app.route(f"{server.get_prefix()}/")
 def index():
@@ -40,8 +40,13 @@ def add_media():
         return jsonify({"error": True, "message": "Media body is missing"}), 200
 
     media = request.files["media"]
+    extension = service_media.get_extension(filename=media.filename)
 
-    if ( service_media.get_extension(filename=media.filename) != False ) :
+    if ( extension != False ) :
+        media_b64 = base64.b64encode(media.read())
+        decoded = base64.b64decode(media_b64)
+        newMedia = {"fileB64": decoded, "extension": extension}
+
         return jsonify({
             "error": False,
             "message": "Media uploaded successfully !"}), 200
