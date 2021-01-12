@@ -55,10 +55,7 @@ def add_media():
             "error": False,
             "message": "Media uploaded successfully !"}), 200
     else :
-
-        print(set(os.getenv("ALLOWED_EXTENSION")))
         allowed_extensions = " ".join([x for x in set(os.getenv("ALLOWED_EXTENSION")) ])
-        print(allowed_extensions)
         return jsonify({
             "error": True,
             "message": allowed_extensions}), 400
