@@ -3,7 +3,6 @@ from flask import Flask, jsonify, request, Response
 from flask_cors import CORS
 from conf import server, db
 import base64
-import json
 
 from services import media as service_media
 
@@ -23,13 +22,6 @@ print(client.list_database_names())
 
 # Init collections
 collectionMedias = db.init_collection(client, database, "medias", db.get_db_name())
-
-
-# mydict = { "name": "Peter", "address": "Lowstreet 27" }
-# x = collectionMedias.insert_one(mydict)
-# print(x)
-# for y in collectionMedias.find():
-# print(y)
 
 @app.route(f"{server.get_prefix()}/")
 def index():
@@ -73,18 +65,5 @@ def get_media(uuid):
             "error": False,
             "message": "No media found."}), 204
 
-    print(list(media.keys()))
     decoded_b64 = base64.b64decode(media["file_base_64"])
-    return Response(decoded_b64, mimetype="image/jpeg")
-
-    # if 'media' not in request.files:
-    #    return jsonify({"error": True, "message": "Media body is missing"}), 200
-
-    # media = request.files["media"]
-
-    # return "ok"
-
-    # print(service_media.get_media())
-#    media_b64 = base64.b64encode(media.read())
-#    decoded = base64.b64decode(media_b64)
-#    return Response(decoded, mimetype="image/jpeg")
+    return Response(decoded_b64, mimetype="image/jpeg"), 200
