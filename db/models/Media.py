@@ -1,7 +1,7 @@
 import arrow
 
 class Media :
-    fileBase64 = ""
+    file_base_64 = ""
     extension = ""
     created_at = ""
     updated_at = ""
@@ -9,8 +9,8 @@ class Media :
     user_id=""
     uuid = ""
 
-    def __init__(self, fileBase64, extension, user_email, user_id, uuid,created_at=arrow.utcnow().format('YYYY-MM-DDTHH:mm:ss.SSS'), updated_at=arrow.utcnow().format('YYYY-MM-DDTHH:mm:ss.SSS')):
-        self.fileBase64 = fileBase64
+    def __init__(self, file_base_64, extension, user_email, user_id, uuid,created_at=arrow.utcnow().format('YYYY-MM-DDTHH:mm:ss.SSS'), updated_at=arrow.utcnow().format('YYYY-MM-DDTHH:mm:ss.SSS')):
+        self.file_base_64 = file_base_64
         self.extension = extension
         self.created_at = created_at
         self.updated_at = updated_at
