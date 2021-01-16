@@ -43,7 +43,7 @@ def add_media():
     extension = service_media.get_extension(filename=media.filename)
 
     if (extension != False):
-        service_media.upload_media(media=media, user_email=data["user_email"], user_id=data["user_id"],
+        service_media.upload_media(media=media, user_email=data["user_email"], user_uuid=data["user_uuid"],
                                    collectionMedia=collectionMedias)
 
         return jsonify({
