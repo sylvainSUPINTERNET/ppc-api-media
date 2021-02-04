@@ -42,9 +42,8 @@ def add_media():
 
     extension = service_media.get_extension(filename=media.filename)
 
-    if (extension != False):
-        service_media.upload_media(media=media, user_email=data["user_email"], user_uuid=data["user_uuid"],
-                                   collectionMedia=collectionMedias)
+    if extension != False:
+        service_media.upload_media(media=media, user_email=data["user_email"], user_id=data["user_id"],collection_media=collectionMedias)
 
         return jsonify({
             "error": False,
@@ -58,7 +57,7 @@ def add_media():
 
 @app.route(f"{server.get_prefix()}/medias/<uuid>", methods=["GET"])
 def get_media(uuid):
-    media = service_media.get_media(media_uuid=uuid, collectionMedia=collectionMedias)
+    media = service_media.get_media(media_uuid=uuid, collection_media=collectionMedias)
 
     if media is None:
         return jsonify({
